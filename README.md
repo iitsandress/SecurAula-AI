@@ -271,11 +271,11 @@ edumon/
 - [API Reference](docs/api.md)
 - [Troubleshooting](docs/troubleshooting.md)
 
-- 🐛 Issues: [GitHub Issues](https://github.com/iitsandress/SecurAula-AI/issues)
+- 🐛 Issues: [GitHub Issues](https://github.com/iitsandress/SecurAula-AI/issue)
 
 ## 📄 Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT. Ver [LICENSE](LICENSE) para más detalles.
+Este proyecto está licenciado bajo la Licencia MIT. Ver [LICENSE](https://github.com/iitsandress/SecurAula-AI/blob/main/edumon/LICENSE) para más detalles.
 
 ## 🙏 Agradecimientos
 
