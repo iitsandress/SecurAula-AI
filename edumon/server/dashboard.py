@@ -6,7 +6,7 @@ from typing import Any, Dict
 from fastapi import APIRouter, Depends, HTTPException, Header
 from fastapi.responses import HTMLResponse
 
-API_KEY = os.environ.get("EDUMON_API_KEY", "changeme")
+API_KEY = os.environ.get("EDUMON_API_KEY", "S1R4X")
 DATA_DIR = os.environ.get("EDUMON_DATA_DIR", os.path.join(os.path.dirname(__file__), "data"))
 CLIENTS_FILE = os.path.join(DATA_DIR, "clients.json")
 

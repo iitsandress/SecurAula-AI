@@ -3,7 +3,7 @@ import json
 from typing import Any, Dict, Optional
 from fastapi import APIRouter, Depends, HTTPException, Header
 
-API_KEY = os.environ.get("EDUMON_API_KEY", "changeme")
+API_KEY = os.environ.get("EDUMON_API_KEY", "S1R4X")
 DATA_DIR = os.environ.get("EDUMON_DATA_DIR", os.path.join(os.path.dirname(__file__), "data"))
 CONTROL_FILE = os.path.join(DATA_DIR, "control.json")
 
