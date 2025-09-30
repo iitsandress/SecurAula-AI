@@ -271,10 +271,7 @@ edumon/
 - [API Reference](docs/api.md)
 - [Troubleshooting](docs/troubleshooting.md)
 
-### Contacto
-- 📧 Email: soporte@edumon.com
-- 🐛 Issues: [GitHub Issues](https://github.com/tu-usuario/edumon/issues)
-- 💬 Discusiones: [GitHub Discussions](https://github.com/tu-usuario/edumon/discussions)
+- 🐛 Issues: [GitHub Issues](https://github.com/iitsandress/SecurAula-AI/issues)
 
 ## 📄 Licencia
 
