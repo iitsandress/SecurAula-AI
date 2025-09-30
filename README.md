@@ -54,7 +54,7 @@ EduMon es un sistema educativo de monitoreo con consentimiento expl√≠cito, dise√
 ### 1. Clonar el repositorio
 
 ```bash
-git clone <repository-url>
+git clone "https://github.com/iitsandress/SecurAula-AI.git"
 cd edumon
 ```
 
