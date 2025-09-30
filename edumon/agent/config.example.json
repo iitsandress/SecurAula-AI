@@ -1,0 +1,16 @@
+{
+  "server_url": "http://127.0.0.1:8000",
+  "api_key": "por-favor-cambie-esta-clave",
+  "classroom_id": null,
+  "heartbeat_seconds": 15,
+  "auto_start": false,
+  "minimize_to_tray": true,
+  "enable_notifications": true,
+  "log_level": "INFO",
+  "collect_disk_metrics": true,
+  "collect_network_metrics": true,
+  "collect_process_metrics": true,
+  "collect_temperature": false,
+  "verify_ssl": true,
+  "timeout_seconds": 10
+}
