@@ -193,7 +193,6 @@ class ModernGui(QWidget):
                 border-radius: 4px; 
                 font-size: 16px; 
                 font-weight: bold;
-                cursor: pointer;
             }
             #connect_button { background-color: #4CAF50; color: white; }
             #disconnect_button { background-color: #F44336; color: white; }
