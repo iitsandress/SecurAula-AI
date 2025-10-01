@@ -8,7 +8,7 @@ Instalación
 1) cd edumon/agent
 2) pip install -r requirements.txt
 3) Copie config.example.json a config.json y edite:
-   - server_url: URL del servidor (p. ej., http://127.0.0.1:8000)
+   - server_url: URL del servidor (p. ej., http://190.84.119.196:8000)
    - api_key: misma clave que EDUMON_API_KEY en el servidor
    - heartbeat_seconds: intervalo entre envíos (ej. 15)
 

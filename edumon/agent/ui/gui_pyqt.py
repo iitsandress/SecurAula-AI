@@ -53,7 +53,7 @@ class ModernGui(QWidget):
         # --- Connection Form ---
         form_layout = QGridLayout()
         form_layout.setSpacing(15)
-        self.server_ip_input = self.create_line_edit(self.initial_config.get('server_ip', '127.0.0.1'))
+        self.server_ip_input = self.create_line_edit(self.initial_config.get('server_ip', '190.84.119.196'))
         self.api_key_input = self.create_line_edit(self.initial_config.get('api_key', ''), is_password=True)
         self.classroom_input = self.create_line_edit(self.initial_config.get('classroom_id', 'Aula-1'))
         form_layout.addWidget(QLabel("IP del Servidor:"), 0, 0)
@@ -204,7 +204,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     # Dummy data for testing
     agent_info = {'device_id': 'test-id', 'username': 'test-user', 'hostname': 'test-host'}
-    initial_config = {'server_ip': '192.168.1.100'}
+    initial_config = {'server_ip': '190.84.119.196'}
     ex = ModernGui(agent_info, initial_config)
     ex.show()
     sys.exit(app.exec())

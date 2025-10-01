@@ -11,7 +11,7 @@ from typing import Optional
 @dataclass
 class AgentConfig:
     """Agent configuration"""
-    server_url: str = "http://127.0.0.1:8000"
+    server_url: str = "http://190.84.119.196:8000"
     api_key: str = ""
     heartbeat_seconds: int = 15
     classroom_id: Optional[str] = None

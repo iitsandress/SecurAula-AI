@@ -71,7 +71,7 @@ def sample_client_data():
         "username": "test-user",
         "consent": True,
         "classroom_id": 1,
-        "ip_address": "192.168.1.100",
+        "ip_address": "190.84.119.196",
         "os_info": "Windows 10"
     }
 

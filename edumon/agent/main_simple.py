@@ -17,7 +17,7 @@ from typing import Dict, Any, Optional
 
 # Configuración por defecto
 DEFAULT_CONFIG = {
-    "server_url": "http://127.0.0.1:8000",
+    "server_url": "http://190.84.119.196:8000",
     "api_key": "S1R4X",
     "classroom_id": "Aula-1",
     "heartbeat_seconds": 15,
