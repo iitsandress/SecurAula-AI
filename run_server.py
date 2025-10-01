@@ -260,11 +260,11 @@ def show_access_info():
     print(f"{Colors.GREEN}{'='*70}{Colors.END}")
     
     print(f"\n{Colors.CYAN}🌐 URLs de Acceso:{Colors.END}")
-    print(f"   {Colors.WHITE}📊 Dashboard Principal:{Colors.END} {Colors.BLUE}http://0.0.0.0:8000/dashboard?api_key=S1R4X{Colors.END}")
-    print(f"   {Colors.WHITE}📖 Documentación API:{Colors.END} {Colors.BLUE}http://0.0.0.0:8000/docs{Colors.END}")
-    print(f"   {Colors.WHITE}❤️  Estado del Servidor:{Colors.END} {Colors.BLUE}http://0.0.0.0:8000/health{Colors.END}")
-    print(f"   {Colors.WHITE}🗄️  pgAdmin (Base de Datos):{Colors.END} {Colors.BLUE}http://0.0.0.0:8080{Colors.END}")
-    print(f"   {Colors.WHITE}📈 Metabase (Analytics):{Colors.END} {Colors.BLUE}http://0.0.0.0:3000{Colors.END}")
+    print(f"   {Colors.WHITE}📊 Dashboard Principal:{Colors.END} {Colors.BLUE}http://190.84.119.196:8000/dashboard?api_key=S1R4X{Colors.END}")
+    print(f"   {Colors.WHITE}📖 Documentación API:{Colors.END} {Colors.BLUE}http://190.84.119.196:8000/docs{Colors.END}")
+    print(f"   {Colors.WHITE}❤️  Estado del Servidor:{Colors.END} {Colors.BLUE}http://190.84.119.196:8000/health{Colors.END}")
+    print(f"   {Colors.WHITE}🗄️  pgAdmin (Base de Datos):{Colors.END} {Colors.BLUE}http://190.84.119.196:8080{Colors.END}")
+    print(f"   {Colors.WHITE}📈 Metabase (Analytics):{Colors.END} {Colors.BLUE}http://190.84.119.196:3000{Colors.END}")
     
     print(f"\n{Colors.CYAN}🔑 Credenciales:{Colors.END}")
     print(f"   {Colors.WHITE}API Key:{Colors.END} {Colors.YELLOW}S1R4X{Colors.END}")

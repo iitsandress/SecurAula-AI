@@ -458,9 +458,9 @@ def run_server():
     import uvicorn
     print("🎓 Iniciando EduMon Server - Programa del Profesor")
     print(f"🔑 API Key: {API_KEY}")
-    print("📊 Dashboard: http://0.0.0.0:8000/dashboard")
-    print("🔧 API Docs: http://0.0.0.0:8000/docs")
-    print("❤️ Health: http://0.0.0.0:8000/health")
+    print("📊 Dashboard: http://190.84.119.196:8000/dashboard")
+    print("🔧 API Docs: http://190.84.119.196:8000/docs")
+    print("❤️ Health: http://190.84.119.196:8000/health")
     print("\n⚠️  Presiona Ctrl+C para detener el servidor")
     print("=" * 60)
     

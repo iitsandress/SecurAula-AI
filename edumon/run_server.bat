@@ -35,9 +35,9 @@ echo ========================================
 echo   SERVIDOR INICIADO
 echo ========================================
 echo.
-echo Dashboard: http://localhost:8000/dashboard
-echo API Docs:  http://localhost:8000/docs
-echo Health:    http://localhost:8000/health
+echo Dashboard: http://190.84.119.196:8000/dashboard
+echo API Docs:  http://190.84.119.196:8000/docs
+echo Health:    http://190.84.119.196:8000/health
 echo.
 echo Presiona Ctrl+C para detener
 echo ========================================

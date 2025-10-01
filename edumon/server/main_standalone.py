@@ -281,6 +281,6 @@ if __name__ == "__main__":
     import uvicorn
     print("🎓 Iniciando EduMon Server - Programa del Profesor")
     print(f"🔑 API Key: {API_KEY}")
-    print("📊 Dashboard: http://0.0.0.0:8000/dashboard")
-    print("🔧 API Docs: http://0.0.0.0:8000/docs")
+    print("📊 Dashboard: http://190.84.119.196:8000/dashboard")
+    print("🔧 API Docs: http://190.84.119.196:8000/docs")
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
