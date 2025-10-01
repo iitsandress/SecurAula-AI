@@ -38,9 +38,9 @@ def main():
     
     # Ejecutar el servidor
     print("\n🚀 Iniciando servidor...")
-    print("📊 Dashboard disponible en: http://localhost:8000/dashboard")
-    print("🔧 API disponible en: http://localhost:8000/docs")
-    print("❤️  Health check: http://localhost:8000/health")
+    print("📊 Dashboard disponible en: http://0.0.0.0:8000/dashboard")
+    print("🔧 API disponible en: http://0.0.0.0:8000/docs")
+    print("❤️  Health check: http://0.0.0.0:8000/health")
     print("\n⚠️  Presiona Ctrl+C para detener el servidor")
     print("=" * 50)
     

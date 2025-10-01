@@ -182,9 +182,9 @@ def wait_for_services():
     
     services = {
         "PostgreSQL": ("localhost", 5432),
-        "Backend": ("localhost", 8000),
-        "pgAdmin": ("localhost", 8080),
-        "Metabase": ("localhost", 3000)
+        "Backend": ("0.0.0.0", 8000),
+        "pgAdmin": ("0.0.0.0", 8080),
+        "Metabase": ("0.0.0.0", 3000)
     }
     
     max_wait = 120  # 2 minutos máximo
@@ -229,7 +229,7 @@ def verify_backend_health():
         # Intentar conectar al health endpoint
         for attempt in range(6):  # 30 segundos máximo
             try:
-                response = requests.get("http://localhost:8000/health", timeout=5)
+                response = requests.get("http://0.0.0.0:8000/health", timeout=5)
                 if response.status_code == 200:
                     data = response.json()
                     print(f"{Colors.GREEN}✅ Backend respondiendo correctamente{Colors.END}")
@@ -260,11 +260,11 @@ def show_access_info():
     print(f"{Colors.GREEN}{'='*70}{Colors.END}")
     
     print(f"\n{Colors.CYAN}🌐 URLs de Acceso:{Colors.END}")
-    print(f"   {Colors.WHITE}📊 Dashboard Principal:{Colors.END} {Colors.BLUE}http://localhost:8000/dashboard?api_key=S1R4X{Colors.END}")
-    print(f"   {Colors.WHITE}📖 Documentación API:{Colors.END} {Colors.BLUE}http://localhost:8000/docs{Colors.END}")
-    print(f"   {Colors.WHITE}❤️  Estado del Servidor:{Colors.END} {Colors.BLUE}http://localhost:8000/health{Colors.END}")
-    print(f"   {Colors.WHITE}🗄️  pgAdmin (Base de Datos):{Colors.END} {Colors.BLUE}http://localhost:8080{Colors.END}")
-    print(f"   {Colors.WHITE}📈 Metabase (Analytics):{Colors.END} {Colors.BLUE}http://localhost:3000{Colors.END}")
+    print(f"   {Colors.WHITE}📊 Dashboard Principal:{Colors.END} {Colors.BLUE}http://0.0.0.0:8000/dashboard?api_key=S1R4X{Colors.END}")
+    print(f"   {Colors.WHITE}📖 Documentación API:{Colors.END} {Colors.BLUE}http://0.0.0.0:8000/docs{Colors.END}")
+    print(f"   {Colors.WHITE}❤️  Estado del Servidor:{Colors.END} {Colors.BLUE}http://0.0.0.0:8000/health{Colors.END}")
+    print(f"   {Colors.WHITE}🗄️  pgAdmin (Base de Datos):{Colors.END} {Colors.BLUE}http://0.0.0.0:8080{Colors.END}")
+    print(f"   {Colors.WHITE}📈 Metabase (Analytics):{Colors.END} {Colors.BLUE}http://0.0.0.0:3000{Colors.END}")
     
     print(f"\n{Colors.CYAN}🔑 Credenciales:{Colors.END}")
     print(f"   {Colors.WHITE}API Key:{Colors.END} {Colors.YELLOW}S1R4X{Colors.END}")
