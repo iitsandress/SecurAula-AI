@@ -3,3 +3,14 @@
 2025-10-02 09:09:47 - root - INFO - Log file: C:\Users\usuario\Downloads\repo\SecurAula-AI\SERVIDOR FINAL\agent\logs\agent_20251002.log
 2025-10-02 09:09:47 - root - ERROR - Error in GUI mode: attempted relative import beyond top-level package
 2025-10-02 09:09:47 - root - ERROR - Error in headless mode: cannot import name 'MetricsCollector' from 'core.metrics' (C:\Users\usuario\Downloads\repo\SecurAula-AI\SERVIDOR FINAL\agent\core\metrics.py)
+2025-10-02 10:18:49 - root - INFO - EduMon Agent logging initialized
+2025-10-02 10:18:49 - root - INFO - Log level: INFO
+2025-10-02 10:18:49 - root - INFO - Log file: c:\Users\usuario\Downloads\repo\SecurAula-AI\SERVIDOR FINAL\agent\logs\agent_20251002.log
+2025-10-02 10:18:49 - root - ERROR - Error in GUI mode: cannot import name 'MetricsCollector' from 'agent.core.metrics' (c:\Users\usuario\Downloads\repo\SecurAula-AI\SERVIDOR FINAL\agent\core\metrics.py)
+2025-10-02 10:18:49 - root - ERROR - Error in headless mode: cannot import name 'MetricsCollector' from 'agent.core.metrics' (c:\Users\usuario\Downloads\repo\SecurAula-AI\SERVIDOR FINAL\agent\core\metrics.py)
+2025-10-02 10:33:57 - root - INFO - EduMon Agent logging initialized
+2025-10-02 10:33:57 - root - INFO - Log level: INFO
+2025-10-02 10:33:57 - root - INFO - Log file: C:\Users\usuario\Downloads\repo\SecurAula-AI\SERVIDOR FINAL\agent\logs\agent_20251002.log
+2025-10-02 10:33:58 - root - ERROR - Error in GUI mode: 'QTextEdit' object has no attribute 'setMaximumBlockCount'
+2025-10-02 10:34:02 - audit - INFO - {"action": "consent_denied", "timestamp": "2025-10-02T10:34:02.586499", "details": {"device_id": "dev-84819f176557"}}
+2025-10-02 10:34:02 - agent.core.agent_core - INFO - Consent not granted
