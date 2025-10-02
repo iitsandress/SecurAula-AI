@@ -3,3 +3,16 @@
 2025-10-02 12:03:43 - root - INFO - Log file: c:\Users\Panasonic FZ-55\SecurAula-AI\agent\logs\agent_20251002.log
 2025-10-02 12:03:44 - root - ERROR - Error in GUI mode: attempted relative import beyond top-level package
 2025-10-02 12:03:44 - root - ERROR - Error in headless mode: cannot import name 'MetricsCollector' from 'core.metrics' (c:\Users\Panasonic FZ-55\SecurAula-AI\agent\core\metrics.py)
+2025-10-02 12:05:09 - root - INFO - EduMon Agent logging initialized
+2025-10-02 12:05:09 - root - INFO - Log level: INFO
+2025-10-02 12:05:09 - root - INFO - Log file: c:\Users\Panasonic FZ-55\SecurAula-AI\agent\logs\agent_20251002.log
+2025-10-02 12:05:09 - root - ERROR - Error in GUI mode: attempted relative import beyond top-level package
+2025-10-02 12:05:09 - root - ERROR - Error in headless mode: cannot import name 'MetricsCollector' from 'core.metrics' (c:\Users\Panasonic FZ-55\SecurAula-AI\agent\core\metrics.py)
+2025-10-02 12:06:55 - root - INFO - EduMon Agent logging initialized
+2025-10-02 12:06:55 - root - INFO - Log level: INFO
+2025-10-02 12:06:55 - root - INFO - Log file: c:\Users\Panasonic FZ-55\SecurAula-AI\agent\logs\agent_20251002.log
+2025-10-02 12:06:55 - root - ERROR - Error in headless mode: No module named 'mss'
+2025-10-02 12:08:49 - root - INFO - EduMon Agent logging initialized
+2025-10-02 12:08:49 - root - INFO - Log level: INFO
+2025-10-02 12:08:49 - root - INFO - Log file: c:\Users\Panasonic FZ-55\SecurAula-AI\agent\logs\agent_20251002.log
+2025-10-02 12:08:49 - root - ERROR - Error in headless mode: No module named 'mss'
