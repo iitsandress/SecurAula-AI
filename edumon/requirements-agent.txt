@@ -1,6 +1,0 @@
-# Agent Dependencies
-psutil>=5.9.0
-requests>=2.31.0
-
-# Modern GUI
-PyQt6>=6.5.0
