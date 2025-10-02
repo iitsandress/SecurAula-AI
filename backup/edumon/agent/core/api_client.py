@@ -54,3 +54,15 @@ class ApiClient:
             return response.status_code == 200
         except requests.RequestException:
             return False
+
+    def send_screenshot(self, device_id: str, screenshot: str) -> bool:
+        """Envía una captura de pantalla al servidor."""
+        try:
+            response = self.session.post(
+                f"{self.config.server_url}/api/v1/clients/{device_id}/screenshot",
+                json={"screenshot": screenshot},
+                timeout=self.config.timeout_seconds
+            )
+            return response.status_code == 200
+        except requests.RequestException:
+            return False

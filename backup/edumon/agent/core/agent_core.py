@@ -4,6 +4,8 @@ import logging
 import socket
 import getpass
 from typing import Optional
+import mss
+import base64
 
 from .config import AgentConfig
 from .metrics import MetricsCollector
@@ -26,6 +28,18 @@ class AgentCore:
         self.device_id: str = self.metrics_collector.get_device_id()
         self.is_running = False
         self.stop_event = threading.Event()
+        self.screenshot_requested = threading.Event()
+
+    def capture_screenshot(self) -> Optional[str]:
+        """Captures a screenshot, encodes it in base64 and returns it."""
+        try:
+            with mss.mss() as sct:
+                sct_img = sct.grab(sct.monitors[1])
+                img_bytes = mss.tools.to_png(sct_img.rgb, sct_img.size)
+                return base64.b64encode(img_bytes).decode('utf-8')
+        except Exception as e:
+            self.logger.error(f"Error capturing screenshot: {e}")
+            return None
 
     def get_consent(self) -> bool:
         """Get user consent (headless version)"""
@@ -38,8 +52,8 @@ class AgentCore:
         print("• Métricas de rendimiento: CPU, RAM, disco, red")
         print("• Tiempo de actividad del sistema")
         print("• Información de procesos (solo nombres)")
+        print("• Capturas de pantalla (bajo demanda)")
         print("\nNUNCA se capturan:")
-        print("• Capturas de pantalla")
         print("• Pulsaciones de teclado")
         print("• Contenido de archivos")
         print("• Historial de navegación")
@@ -139,6 +153,11 @@ class AgentCore:
             try:
                 if not self.send_heartbeat():
                     self.logger.warning("Heartbeat failed, continuing...")
+
+                # Check for screenshot request
+                response = self.api_client.session.post(f"{self.config.server_url}/api/v1/clients/{self.device_id}/screenshot_request")
+                if response.status_code == 200:
+                    self.screenshot_requested.set()
 
                 if self.stop_event.wait(self.config.heartbeat_seconds):
                     break

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMon Dashboard</title>
+    <style>
+        body { font-family: sans-serif; }
+        #clients { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .client { border: 1px solid #ccc; border-radius: 5px; padding: 1rem; width: 300px; }
+        .client.online { border-color: green; }
+        .client.offline { border-color: red; }
+    </style>
+</head>
+<body>
+    <h1>EduMon Dashboard</h1>
+    <div id="stats"></div>
+    <div id="clients"></div>
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('/api/v1/clients/status');
+            const data = await response.json();
+
+            const statsDiv = document.getElementById('stats');
+            statsDiv.innerHTML = `
+                <p>Total: ${data.stats.total}</p>
+                <p>Online: ${data.stats.online}</p>
+                <p>Offline: ${data.stats.offline}</p>
+            `;
+
+            const clientsDiv = document.getElementById('clients');
+            clientsDiv.innerHTML = '';
+            for (const client of data.clients) {
+                const clientDiv = document.createElement('div');
+                clientDiv.className = `client ${client.status_class}`;
+                clientDiv.innerHTML = `
+                    <h3>${client.hostname}</h3>
+                    <p>User: ${client.username}</p>
+                    <p>Classroom: ${client.classroom}</p>
+                    <p>Status: ${client.status}</p>
+                    <p>CPU: ${client.cpu}%</p>
+                    <p>Memory: ${client.mem}%</p>
+                    <p>Disk: ${client.disk}%</p>
+                    <p>Uptime: ${client.uptime_str}</p>
+                    <button onclick="requestScreenshot('${client.id}')">Request Screenshot</button>
+                `;
+                clientsDiv.appendChild(clientDiv);
+            }
+        }
+
+        async function requestScreenshot(deviceId) {
+            await fetch(`/api/v1/clients/${deviceId}/screenshot_request`, { method: 'POST' });
+            // Poll for the screenshot
+            const interval = setInterval(async () => {
+                const response = await fetch(`/api/v1/clients/${deviceId}/screenshot`);
+                const data = await response.json();
+                if (data.screenshot) {
+                    clearInterval(interval);
+                    const modal = document.createElement('div');
+                    modal.style.position = 'fixed';
+                    modal.style.top = '0';
+                    modal.style.left = '0';
+                    modal.style.width = '100%';
+                    modal.style.height = '100%';
+                    modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    modal.style.display = 'flex';
+                    modal.style.justifyContent = 'center';
+                    modal.style.alignItems = 'center';
+                    modal.onclick = () => modal.remove();
+                    const img = document.createElement('img');
+                    img.src = `data:image/png;base64,${data.screenshot}`;
+                    modal.appendChild(img);
+                    document.body.appendChild(modal);
+                }
+            }, 2000);
+        }
+
+        setInterval(fetchData, 5000);
+        fetchData();
+    </script>
+</body>
+</html>
