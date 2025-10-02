@@ -1,0 +1,11 @@
+{
+  "server_url": "http://190.84.119.196:8000",
+  "api_key": "S1R4X",
+  "classroom_id": "Aula-1",
+  "heartbeat_seconds": 15,
+  "collect_disk_metrics": true,
+  "collect_network_metrics": true,
+  "collect_process_metrics": true,
+  "verify_ssl": false,
+  "timeout_seconds": 10
+}

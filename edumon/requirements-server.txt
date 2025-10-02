@@ -1,0 +1,11 @@
+# Web Framework & Server
+fastapi>=0.110.0
+uvicorn[standard]>=0.23.0
+pydantic>=2.5.0
+pydantic-settings>=2.0.0
+
+# Database
+sqlalchemy>=2.0.0
+
+# Async file I/O
+aiofiles>=23.2.1
