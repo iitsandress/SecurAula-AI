@@ -1,0 +1,10 @@
+# SecurAula-AI Agent Requirements
+# Core dependencies for system monitoring
+psutil>=5.8.0
+requests>=2.25.0
+
+# Optional GUI dependencies (uncomment if using GUI version)
+# PyQt6>=6.0.0
+
+# Development dependencies (optional)
+# urllib3>=1.26.0

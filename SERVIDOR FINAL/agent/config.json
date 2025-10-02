@@ -1,0 +1,16 @@
+{
+  "server_url": "https://bf51ee470ecd.ngrok-free.app",
+  "api_key": "S1R4X",
+  "classroom_id": null,
+  "heartbeat_seconds": 15,
+  "auto_start": false,
+  "minimize_to_tray": true,
+  "enable_notifications": true,
+  "log_level": "INFO",
+  "collect_disk_metrics": true,
+  "collect_network_metrics": true,
+  "collect_process_metrics": true,
+  "collect_temperature": false,
+  "verify_ssl": true,
+  "timeout_seconds": 10
+}
