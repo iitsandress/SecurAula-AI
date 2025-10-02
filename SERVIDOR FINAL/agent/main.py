@@ -9,11 +9,11 @@ import logging
 import argparse
 from typing import Optional
 
-# Add current directory to path for imports
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Fix imports by adding the parent directory to the path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from core.config import load_config, save_config, AgentConfig
-from core.logging_config import setup_logging
+from agent.core.config import load_config, save_config, AgentConfig
+from agent.core.logging_config import setup_logging
 
 
 def setup_argument_parser() -> argparse.ArgumentParser:
@@ -110,7 +110,7 @@ def run_config_wizard() -> AgentConfig:
 def run_headless_mode(config: AgentConfig) -> int:
     """Run agent in headless mode"""
     try:
-        from core.agent_core import AgentCore
+        from agent.core.agent_core import AgentCore
         
         print("Starting EduMon Agent in headless mode...")
         print(f"Server: {config.server_url}")
@@ -138,7 +138,7 @@ def run_gui_mode(config: AgentConfig) -> int:
             print("PyQt6 not available. Running in headless mode...")
             return run_headless_mode(config)
         
-        from ui.main_window import main as gui_main
+        from agent.ui.main_window import main as gui_main
         
         return gui_main()
         

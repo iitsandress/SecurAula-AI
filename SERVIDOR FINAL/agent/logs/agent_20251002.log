@@ -1,0 +1,5 @@
+2025-10-02 09:09:47 - root - INFO - EduMon Agent logging initialized
+2025-10-02 09:09:47 - root - INFO - Log level: INFO
+2025-10-02 09:09:47 - root - INFO - Log file: C:\Users\usuario\Downloads\repo\SecurAula-AI\SERVIDOR FINAL\agent\logs\agent_20251002.log
+2025-10-02 09:09:47 - root - ERROR - Error in GUI mode: attempted relative import beyond top-level package
+2025-10-02 09:09:47 - root - ERROR - Error in headless mode: cannot import name 'MetricsCollector' from 'core.metrics' (C:\Users\usuario\Downloads\repo\SecurAula-AI\SERVIDOR FINAL\agent\core\metrics.py)
