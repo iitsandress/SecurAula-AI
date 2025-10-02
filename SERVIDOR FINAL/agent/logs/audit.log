@@ -1,3 +1,5 @@
 2025-10-02 10:34:02 - AUDIT - {"action": "consent_denied", "timestamp": "2025-10-02T10:34:02.586499", "details": {"device_id": "dev-84819f176557"}}
 2025-10-02 11:03:19 - AUDIT - {"action": "consent_granted", "timestamp": "2025-10-02T11:03:19.537541", "details": {"device_id": "dev-84819f176557"}}
 2025-10-02 11:03:20 - AUDIT - {"action": "registration_success", "timestamp": "2025-10-02T11:03:20.795990", "details": {"session_id": "d5c81c0e-a0c9-4abf-a79b-6f4ab7a76c62", "server_url": "https://faye-ingestible-wackily.ngrok-free.dev", "classroom_id": null}}
+2025-10-02 11:19:35 - AUDIT - {"action": "consent_granted", "timestamp": "2025-10-02T11:19:35.753321", "details": {"device_id": "dev-84819f176557"}}
+2025-10-02 11:19:36 - AUDIT - {"action": "registration_success", "timestamp": "2025-10-02T11:19:36.820721", "details": {"session_id": "3497d30a-c675-427c-9676-82e48f6b6ee5", "server_url": "https://faye-ingestible-wackily.ngrok-free.dev", "classroom_id": null}}
