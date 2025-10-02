@@ -1,139 +1,137 @@
+<!doctype html>
+<html lang='es'>
+<head>
+    <meta charset='utf-8'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1'/>
+    <meta http-equiv='refresh' content='15'>
+    <title>EduMon Dashboard</title>
+    <style>
+        body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 24px; background: #fafafa; }
+        h1 { font-size: 20px; }
+        table { border-collapse: collapse; width: 100%; background: #fff; }
+        th, td { border: 1px solid #ddd; padding: 8px; font-size: 14px; }
+        th { background: #f0f0f0; text-align: left; }
+        .muted { color: #666; font-size: 12px; }
+        .dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+        .status-green { background:#19c37d; }
+        .status-yellow { background:#f6c744; }
+        .status-red { background:#ef4444; }
+        .status-gray { background:#9ca3af; }
+        .btn { background:#2563eb; color:#fff; border:none; padding:6px 10px; border-radius:4px; cursor:pointer; margin-right:6px; }
+        .btn:hover { background:#1d4ed8; }
+        .toolbar { margin:8px 0 12px; }
+    </style>
+</head>
+<body>
+    <h1>EduMon - Panel de aula</h1>
+    <p class='muted'>Solo métricas mínimas. Última actualización: </p>
+    <p>Total: 0 | En línea: 0 | Inactivo: 0 | Desconectado: 0</p>
+    <form method='get' action='/dashboard' style='margin:8px 0;'>
+        <label for='classroom'>Filtrar por aula:</label>
+        <input type='text' name='classroom' id='classroom' placeholder='Sala-1' value='' />
+        <button type='submit'>Filtrar</button>
+    </form>
+    <div class='toolbar'>
+        <label>API Key: <input id='apiKey' type='password' placeholder='Clave...' /></label>
+        <button type='button' class='btn' id='saveKey'>Guardar</button>
+        <button type='button' class='btn' id='toggleStopAll'>Stop All: <span id='stopAllStatus'>-</span></button>
+        <button type='button' class='btn' id='downloadCsv'>Descargar CSV</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Device ID</th>
+                <th>Host</th>
+                <th>Usuario</th>
+                <th>Aula</th>
+                <th>CPU %</th>
+                <th>RAM %</th>
+                <th>Uptime (s)</th>
+                <th>Estado</th>
+                <th>Hace</th>
+                <th>Visto</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <script>
+    (function(){
+        const apiKeyInput = document.getElementById('apiKey');
+        const saveBtn = document.getElementById('saveKey');
+        const stopAllBtn = document.getElementById('toggleStopAll');
+        const stopAllStatus = document.getElementById('stopAllStatus');
+        const dlBtn = document.getElementById('downloadCsv');
 
-    <!doctype html>
-    <html lang='es'>
-    <head>
-        <meta charset='utf-8'/>
-        <meta name='viewport' content='width=device-width, initial-scale=1'/>
-        <meta http-equiv='refresh' content='15'>
-        <title>EduMon Dashboard</title>
-        <style>
-            body {{ font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 24px; background: #fafafa; }}
-            h1 {{ font-size: 20px; }}
-            table {{ border-collapse: collapse; width: 100%; background: #fff; }}
-            th, td {{ border: 1px solid #ddd; padding: 8px; font-size: 14px; }}
-            th {{ background: #f0f0f0; text-align: left; }}
-            .muted {{ color: #666; font-size: 12px; }}
-            .dot {{ display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; vertical-align:middle; }}
-            .status-green {{ background:#19c37d; }}
-            .status-yellow {{ background:#f6c744; }}
-            .status-red {{ background:#ef4444; }}
-            .status-gray {{ background:#9ca3af; }}
-            .btn {{ background:#2563eb; color:#fff; border:none; padding:6px 10px; border-radius:4px; cursor:pointer; margin-right:6px; }}
-            .btn:hover {{ background:#1d4ed8; }}
-            .toolbar {{ margin:8px 0 12px; }}
-        </style>
-    </head>
-    <body>
-        <h1>EduMon - Panel de aula</h1>
-        <p class='muted'>Solo métricas mínimas. Última actualización: </p>
-        <p>Total: 0 | En línea: 0 | Inactivo: 0 | Desconectado: 0</p>
-        <form method='get' action='/dashboard' style='margin:8px 0;'>
-            <label for='classroom'>Filtrar por aula:</label>
-            <input type='text' name='classroom' id='classroom' placeholder='Sala-1' value='' />
-            <button type='submit'>Filtrar</button>
-        </form>
-        <div class='toolbar'>
-            <label>API Key: <input id='apiKey' type='password' placeholder='Clave...' /></label>
-            <button type='button' class='btn' id='saveKey'>Guardar</button>
-            <button type='button' class='btn' id='toggleStopAll'>Stop All: <span id='stopAllStatus'>-</span></button>
-            <button type='button' class='btn' id='downloadCsv'>Descargar CSV</button>
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Device ID</th>
-                    <th>Host</th>
-                    <th>Usuario</th>
-                    <th>Aula</th>
-                    <th>CPU %</th>
-                    <th>RAM %</th>
-                    <th>Uptime (s)</th>
-                    <th>Estado</th>
-                    <th>Hace</th>
-                    <th>Visto</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
-        <script>
-        (function(){{
-            const apiKeyInput = document.getElementById('apiKey');
-            const saveBtn = document.getElementById('saveKey');
-            const stopAllBtn = document.getElementById('toggleStopAll');
-            const stopAllStatus = document.getElementById('stopAllStatus');
-            const dlBtn = document.getElementById('downloadCsv');
+        function getKey(){ return localStorage.getItem('edumon_api_key') || ''; }
+        function setKey(k){ localStorage.setItem('edumon_api_key', k); }
+        function headers(){ return { 'X-API-Key': getKey(), 'Content-Type': 'application/json' }; }
 
-            function getKey(){{ return localStorage.getItem('edumon_api_key') || ''; }}
-            function setKey(k){{ localStorage.setItem('edumon_api_key', k); }}
-            function headers(){{ return {{ 'X-API-Key': getKey(), 'Content-Type': 'application/json' }}; }}
+        async function refreshControl(){
+            const k = getKey();
+            if(!k){ stopAllStatus.textContent = '-'; return; }
+            try{
+                const r = await fetch('/api/v1/control', {headers: headers()});
+                if(!r.ok){ stopAllStatus.textContent = 'error'; return; }
+                const obj = await r.json();
+                stopAllStatus.textContent = obj.stop_all ? 'ON' : 'OFF';
+                stopAllBtn.dataset.state = obj.stop_all ? 'on' : 'off';
+            }catch(e){ stopAllStatus.textContent = 'error'; }
+        }
 
-            async function refreshControl(){
-                const k = getKey();
-                if(!k){{ stopAllStatus.textContent = '-'; return; }}
-                try{
-                    const r = await fetch('/api/v1/control', {{headers: headers()}});
-                    if(!r.ok){{ stopAllStatus.textContent = 'error'; return; }}
-                    const obj = await r.json();
-                    stopAllStatus.textContent = obj.stop_all ? 'ON' : 'OFF';
-                    stopAllBtn.dataset.state = obj.stop_all ? 'on' : 'off';
-                }}catch(e){{ stopAllStatus.textContent = 'error'; }}
-            }}
+        async function toggleStopAll(){
+            const state = stopAllBtn.dataset.state === 'on';
+            const payload = { value: !state };
+            const r = await fetch('/api/v1/control/stop_all', {method: 'POST', headers: headers(), body: JSON.stringify(payload)});
+            if(r.ok){ await refreshControl(); }
+        }
 
-            async function toggleStopAll(){
-                const state = stopAllBtn.dataset.state === 'on';
-                const payload = {{ value: !state }};
-                const r = await fetch('/api/v1/control/stop_all', {{method: 'POST', headers: headers(), body: JSON.stringify(payload)}});
-                if(r.ok){{ await refreshControl(); }}
-            }}
+        async function postDevice(path, dev){
+            const r = await fetch(path, {method:'POST', headers: headers(), body: JSON.stringify({device_id: dev})});
+            return r.ok;
+        }
 
-            async function postDevice(path, dev){
-                const r = await fetch(path, {{method:'POST', headers: headers(), body: JSON.stringify({{device_id: dev}})}});
-                return r.ok;
-            }}
+        function exportCsv(){
+            const table = document.querySelector('table');
+            const rows = Array.from(table.querySelectorAll('tr'));
+            const csv = rows.map((tr, idx) => {
+                const cells = Array.from(tr.querySelectorAll(idx === 0 ? 'th' : 'td'));
+                // Omitir la última columna (Acciones)
+                const sel = cells.slice(0, Math.max(0, cells.length - 1));
+                return sel.map(td => '"' + (td.innerText||'').replace(/"/g,'""') + '"').join(',');
+            }).join('\n');
+            const blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'edumon_dashboard.csv';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        }
 
-            function exportCsv(){
-                const table = document.querySelector('table');
-                const rows = Array.from(table.querySelectorAll('tr'));
-                const csv = rows.map((tr, idx) => {{
-                    const cells = Array.from(tr.querySelectorAll(idx === 0 ? 'th' : 'td'));
-                    // Omitir la última columna (Acciones)
-                    const sel = cells.slice(0, Math.max(0, cells.length - 1));
-                    return sel.map(td => '"' + (td.innerText||'').replace(/'"'/g,'""') + '"').join(',');
-                }}).join('\n');
-                const blob = new Blob([csv], {{type: 'text/csv;charset=utf-8;'}});
-                const a = document.createElement('a');
-                a.href = URL.createObjectURL(blob);
-                a.download = 'edumon_dashboard.csv';
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-            }}
+        // Event wiring
+        saveBtn.addEventListener('click', () => { setKey(apiKeyInput.value.trim()); refreshControl(); });
+        stopAllBtn.addEventListener('click', toggleStopAll);
+        dlBtn.addEventListener('click', exportCsv);
+        document.addEventListener('click', async (e) => {
+            const t = e.target;
+            if(t.classList.contains('btn-stop')){
+                const dev = t.getAttribute('data-dev');
+                await postDevice('/api/v1/control/stop_device', dev);
+                await refreshControl();
+            } else if(t.classList.contains('btn-clear')){
+                const dev = t.getAttribute('data-dev');
+                await postDevice('/api/v1/control/clear_device', dev);
+                await refreshControl();
+            }
+        });
 
-            // Event wiring
-            saveBtn.addEventListener('click', () => {{ setKey(apiKeyInput.value.trim()); refreshControl(); }});
-            stopAllBtn.addEventListener('click', toggleStopAll);
-            dlBtn.addEventListener('click', exportCsv);
-            document.addEventListener('click', async (e) => {{
-                const t = e.target;
-                if(t.classList.contains('btn-stop')){{
-                    const dev = t.getAttribute('data-dev');
-                    await postDevice('/api/v1/control/stop_device', dev);
-                    await refreshControl();
-                }} else if(t.classList.contains('btn-clear')){{
-                    const dev = t.getAttribute('data-dev');
-                    await postDevice('/api/v1/control/clear_device', dev);
-                    await refreshControl();
-                }}
-            }});
-
-            // Initialize
-            apiKeyInput.value = getKey();
-            refreshControl();
-        }})();
-        </script>
-    </body>
-    </html>
-    
+        // Initialize
+        apiKeyInput.value = getKey();
+        refreshControl();
+    })();
+    </script>
+</body>
+</html>

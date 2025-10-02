@@ -1,83 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang='es'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='utf-8'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1'/>
     <title>EduMon Dashboard</title>
     <style>
-        body { font-family: sans-serif; }
-        #clients { display: flex; flex-wrap: wrap; gap: 1rem; }
-        .client { border: 1px solid #ccc; border-radius: 5px; padding: 1rem; width: 300px; }
-        .client.online { border-color: green; }
-        .client.offline { border-color: red; }
+        body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 24px; background: #fafafa; }
+        h1 { font-size: 20px; }
+        table { border-collapse: collapse; width: 100%; background: #fff; }
+        th, td { border: 1px solid #ddd; padding: 8px; font-size: 14px; }
+        th { background: #f0f0f0; text-align: left; }
+        .muted { color: #666; font-size: 12px; }
+        .dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+        .status-active { background:#19c37d; }
+        .status-connected { background:#19c37d; }
+        .status-inactive { background:#f6c744; }
+        .status-disconnected { background:#ef4444; }
+        .btn { background:#2563eb; color:#fff; border:none; padding:6px 10px; border-radius:4px; cursor:pointer; margin-right:6px; }
+        .btn:hover { background:#1d4ed8; }
+        .toolbar { margin:8px 0 12px; }
     </style>
 </head>
 <body>
-    <h1>EduMon Dashboard</h1>
-    <div id="stats"></div>
-    <div id="clients"></div>
-
+    <h1>EduMon - Panel de aula</h1>
+    <p class='muted'>Solo métricas mínimas.</p>
+    <p id="summary">Total: 0 | En línea: 0 | Inactivo: 0 | Desconectado: 0</p>
+    <form method='get' action='/' style='margin:8px 0;'>
+        <label for='classroom'>Filtrar por aula:</label>
+        <input type='text' name='classroom' id='classroom' placeholder='Sala-1' value='' />
+        <button type='submit'>Filtrar</button>
+    </form>
+    <div class='toolbar'>
+        <button type='button' class='btn' id='downloadCsv'>Descargar CSV</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Device ID</th>
+                <th>Host</th>
+                <th>Usuario</th>
+                <th>Aula</th>
+                <th>CPU %</th>
+                <th>RAM %</th>
+                <th>Estado</th>
+                <th>Hace</th>
+                <th>Visto</th>
+            </tr>
+        </thead>
+        <tbody id="device-table-body">
+            
+        </tbody>
+    </table>
     <script>
-        async function fetchData() {
-            const response = await fetch('/api/v1/clients/status');
-            const data = await response.json();
+    (function(){
+        const dlBtn = document.getElementById('downloadCsv');
+        const summaryEl = document.getElementById('summary');
+        const tableBody = document.getElementById('device-table-body');
 
-            const statsDiv = document.getElementById('stats');
-            statsDiv.innerHTML = `
-                <p>Total: ${data.stats.total}</p>
-                <p>Online: ${data.stats.online}</p>
-                <p>Offline: ${data.stats.offline}</p>
-            `;
+        function timeAgo(isoString) {
+            const date = new Date(isoString);
+            const seconds = Math.floor((new Date() - date) / 1000);
+            let interval = seconds / 31536000;
+            if (interval > 1) return Math.floor(interval) + " años";
+            interval = seconds / 2592000;
+            if (interval > 1) return Math.floor(interval) + " meses";
+            interval = seconds / 86400;
+            if (interval > 1) return Math.floor(interval) + " días";
+            interval = seconds / 3600;
+            if (interval > 1) return Math.floor(interval) + " horas";
+            interval = seconds / 60;
+            if (interval > 1) return Math.floor(interval) + " minutos";
+            return Math.floor(seconds) + " segundos";
+        }
 
-            const clientsDiv = document.getElementById('clients');
-            clientsDiv.innerHTML = '';
-            for (const client of data.clients) {
-                const clientDiv = document.createElement('div');
-                clientDiv.className = `client ${client.status_class}`;
-                clientDiv.innerHTML = `
-                    <h3>${client.hostname}</h3>
-                    <p>User: ${client.username}</p>
-                    <p>Classroom: ${client.classroom}</p>
-                    <p>Status: ${client.status}</p>
-                    <p>CPU: ${client.cpu}%</p>
-                    <p>Memory: ${client.mem}%</p>
-                    <p>Disk: ${client.disk}%</p>
-                    <p>Uptime: ${client.uptime_str}</p>
-                    <button onclick="requestScreenshot('${client.id}')">Request Screenshot</button>
-                `;
-                clientsDiv.appendChild(clientDiv);
+        async function refreshData() {
+            try {
+                const response = await fetch('/api/v1/devices');
+                if (!response.ok) {
+                    console.error('Error fetching devices:', response.statusText);
+                    return;
+                }
+                const data = await response.json();
+                const devices = data.devices || [];
+
+                // Update summary
+                const total = devices.length;
+                const online = devices.filter(d => d.status === 'active' || d.status === 'connected').length;
+                const inactive = devices.filter(d => d.status === 'inactive').length;
+                const disconnected = devices.filter(d => d.status === 'disconnected').length;
+                summaryEl.textContent = `Total: ${total} | En línea: ${online} | Inactivo: ${inactive} | Desconectado: ${disconnected}`;
+
+                // Populate table
+                tableBody.innerHTML = '';
+                devices.forEach(device => {
+                    const row = document.createElement('tr');
+                    const metrics = device.metrics || {};
+                    row.innerHTML = `
+                        <td>${device.device_id}</td>
+                        <td>${device.hostname}</td>
+                        <td>${device.username}</td>
+                        <td>${device.classroom_id}</td>
+                        <td>${metrics.cpu_percent || 'N/A'}</td>
+                        <td>${metrics.mem_percent || 'N/A'}</td>
+                        <td><span class="dot status-${device.status}"></span> ${device.status}</td>
+                        <td>${timeAgo(device.last_heartbeat)}</td>
+                        <td>${new Date(device.last_heartbeat).toLocaleString()}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error refreshing data:', error);
             }
         }
 
-        async function requestScreenshot(deviceId) {
-            await fetch(`/api/v1/clients/${deviceId}/screenshot_request`, { method: 'POST' });
-            // Poll for the screenshot
-            const interval = setInterval(async () => {
-                const response = await fetch(`/api/v1/clients/${deviceId}/screenshot`);
-                const data = await response.json();
-                if (data.screenshot) {
-                    clearInterval(interval);
-                    const modal = document.createElement('div');
-                    modal.style.position = 'fixed';
-                    modal.style.top = '0';
-                    modal.style.left = '0';
-                    modal.style.width = '100%';
-                    modal.style.height = '100%';
-                    modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
-                    modal.style.display = 'flex';
-                    modal.style.justifyContent = 'center';
-                    modal.style.alignItems = 'center';
-                    modal.onclick = () => modal.remove();
-                    const img = document.createElement('img');
-                    img.src = `data:image/png;base64,${data.screenshot}`;
-                    modal.appendChild(img);
-                    document.body.appendChild(modal);
-                }
-            }, 2000);
+        function exportCsv(){
+            const table = document.querySelector('table');
+            const rows = Array.from(table.querySelectorAll('tr'));
+            const csv = rows.map((tr, idx) => {
+                const cells = Array.from(tr.querySelectorAll(idx === 0 ? 'th' : 'td'));
+                return cells.map(td => '"' + (td.innerText||"").replace(/"/g,'""') + '"').join(',');
+            }).join('\n');
+            const blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'edumon_dashboard.csv';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
         }
 
-        setInterval(fetchData, 5000);
-        fetchData();
+        // Event wiring
+        dlBtn.addEventListener('click', exportCsv);
+
+        // Initialize
+        refreshData();
+        setInterval(refreshData, 5000); // Refresh every 5 seconds
+    })();
     </script>
 </body>
 </html>

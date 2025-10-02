@@ -21,7 +21,7 @@ def get_ngrok_url():
 
 def update_agent_config(ngrok_url):
     """Update agent configuration with new ngrok URL"""
-    config_path = "backup/edumon/agent/config.json"
+    config_path = "SERVIDOR FINAL/agent/config.json"
     
     try:
         # Read current config
