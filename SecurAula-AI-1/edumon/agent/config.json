@@ -1,8 +1,0 @@
-{
-  "server_url": "https://cae7ccde57d5.ngrok-free.app",
-  "api_key": "S1R4X",
-  "classroom_id": "Aula-1",
-  "heartbeat_seconds": 15,
-  "verify_ssl": true,
-  "timeout_seconds": 10
-}
