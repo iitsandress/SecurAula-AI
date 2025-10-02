@@ -1,24 +1,29 @@
 #!/usr/bin/env python3
 """
-Demo script to run the EduMon agent automatically
+Demo script to run the EduMon agent automatically (auto-consent)
 """
+
 import sys
 import os
 
-# Add the agent directory to the path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'backup', 'edumon', 'agent'))
+# Ensure repository root is on sys.path so we can import package-style
+repo_root = os.path.abspath(os.path.dirname(__file__))
+if repo_root not in sys.path:
+    sys.path.insert(0, repo_root)
 
-# Import the agent
-from main_windows import SimpleAgent
+# Import the simple agent implementation that exists in SERVIDOR FINAL/agent
+# We import using package/module path to avoid fragile sys.path hacks.
+from agent.main_simple import SimpleAgent
+
 
 class DemoAgent(SimpleAgent):
     """Demo agent that automatically gives consent"""
-    
+
     def get_consent(self) -> bool:
         """Automatically give consent for demo"""
-        print("\n" + "="*60)
-        print("EDUMON - CONSENT FOR EDUCATIONAL MONITORING")
-        print("="*60)
+        print("\n" + "=" * 60)
+        print("EDUMON - CONSENT FOR EDUCATIONAL MONITORING (DEMO AUTO-CONSENT)")
+        print("=" * 60)
         print("\nThis agent will send ONLY the following data:")
         print("- Anonymous device identifier")
         print("- Host name and system user")
@@ -32,21 +37,29 @@ class DemoAgent(SimpleAgent):
         print("- Browsing history")
         print("- Personal data")
         print("\nYou can stop monitoring at any time with Ctrl+C")
-        print("="*60)
+        print("=" * 60)
         print("\nAUTO-CONSENT: YES (Demo mode)")
         return True
+
 
 def main():
     """Main function"""
     print("EduMon Agent - Demo Mode")
     print("=" * 40)
-    
-    # Change to agent directory
-    agent_dir = os.path.join(os.path.dirname(__file__), 'backup', 'edumon', 'agent')
-    os.chdir(agent_dir)
-    
+
+    # Change to the actual agent directory to let the agent read/write device_id/config.json there
+    agent_dir = os.path.join(repo_root, 'SERVIDOR FINAL', 'agent')
+    if os.path.isdir(agent_dir):
+        os.chdir(agent_dir)
+    else:
+        # fallback: try top-level agent folder if structure differs
+        alt_agent = os.path.join(repo_root, 'agent')
+        if os.path.isdir(alt_agent):
+            os.chdir(alt_agent)
+
     agent = DemoAgent()
     return agent.run()
+
 
 if __name__ == "__main__":
     try:
